@@ -105,6 +105,23 @@ class AddressBook {
     searchByCityOrState(location) {
         return this.contacts.filter(contact => contact.city === location || contact.state === location);
     }
+
+    //search persons using city or state name
+    viewPersonsByCityOrState() {
+        const groupedByCity = this.contacts.reduce((acc, contact) => {
+            acc[contact.city] = acc[contact.city] || [];
+            acc[contact.city].push(contact.displayContact());
+            return acc;
+        }, {});
+
+        const groupedByState = this.contacts.reduce((acc, contact) => {
+            acc[contact.state] = acc[contact.state] || [];
+            acc[contact.state].push(contact.displayContact());
+            return acc;
+        }, {});
+
+        return { groupedByCity, groupedByState };
+    }
 }
 
 const addressBook = new AddressBook();
@@ -130,3 +147,6 @@ addressBook.addContact("Aashi", "Mittal", "Mathura", "CityName", "UttarPradesh",
 // searching contacts by city or state
 console.log("Contacts in CityName:", addressBook.searchByCityOrState("CityName"));
 console.log("Contacts in StateName:", addressBook.searchByCityOrState("UttarPradesh"));
+
+//viewing persons by city or state
+console.log("Persons grouped by city and state:", addressBook.viewPersonsByCityOrState());
