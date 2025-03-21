@@ -100,6 +100,11 @@ class AddressBook {
     getContactCount() {
         return this.contacts.reduce(count => count + 1, 0);
     }
+
+    //search person using cityname or statename
+    searchByCityOrState(location) {
+        return this.contacts.filter(contact => contact.city === location || contact.state === location);
+    }
 }
 
 const addressBook = new AddressBook();
@@ -121,3 +126,7 @@ console.log(JSON.stringify(addressBook.contacts,null,2));
 // Display contact count
 console.log("Number of contacts in address book:", addressBook.getContactCount());
 addressBook.addContact("Aashi", "Mittal", "Mathura", "CityName", "UttarPradesh", "281001", "1234567890", "aashi@gmail.com");
+
+// searching contacts by city or state
+console.log("Contacts in CityName:", addressBook.searchByCityOrState("CityName"));
+console.log("Contacts in StateName:", addressBook.searchByCityOrState("UttarPradesh"));
