@@ -70,6 +70,16 @@ class AddressBook {
     displayContacts() {
         return this.contacts.map(contact => contact.displayContact());
     }
+    
+    findAndEditContact(name, updatedDetails) {
+        const contact = this.contacts.find(c => c.firstName === name || c.lastName === name);
+        if (contact) {
+            Object.assign(contact, updatedDetails);
+            console.log('Contact updated successfully:', contact);
+        } else {
+            console.error('Contact not found.');
+        }
+    }
 }
 
 const addressBook = new AddressBook();
@@ -81,4 +91,11 @@ addressBook.addContact("Sandhya", "Mittal", "Mathura", "CityName", "UttarPradesh
 addressBook.addContact("Akshat", "Thapak", "Mathura", "CityName", "UttarPradesh", "281001", "1234567890", "Akshat@gmail.com");
 addressBook.addContact("Anishka", "Thapak", "Mathura", "CityName", "UttarPradesh", "281001", "1234567890", "Anshika@gmail.com");
 console.log(JSON.stringify(addressBook.contacts));
+console.log();
+
+addressBook.findAndEditContact("Xyz",{city: "NewCity", phone: "9876543210"});
+addressBook.findAndEditContact("Aashi",{city: "NewCity", phone: "1234567890"});
+console.log(JSON.stringify(addressBook.contacts,null,2));
+
+
 console.log();
