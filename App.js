@@ -80,6 +80,17 @@ class AddressBook {
             console.error('Contact not found.');
         }
     }
+
+    ///delete contact from the array
+    findAndDeleteContact(name) {
+        const index = this.contacts.findIndex(c => c.firstName === name || c.lastName === name);
+        if (index !== -1) {
+            this.contacts.splice(index, 1);
+            console.log(`Contact '${name}' deleted successfully.`);
+        } else {
+            console.error('Contact not found.');
+        }
+    }
 }
 
 const addressBook = new AddressBook();
@@ -95,7 +106,6 @@ console.log();
 
 addressBook.findAndEditContact("Xyz",{city: "NewCity", phone: "9876543210"});
 addressBook.findAndEditContact("Aashi",{city: "NewCity", phone: "1234567890"});
+addressBook.findAndDeleteContact("Abc");
+addressBook.findAndDeleteContact("Sandhya");
 console.log(JSON.stringify(addressBook.contacts,null,2));
-
-
-console.log();
